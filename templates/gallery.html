@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/generall.css') }}">
+    <title>Галерея зображень</title>
+</head>
+<body class="container">
+    <h1>Галерея зображень</h1>
+    <div class="gallery">
+        {% for image in images %}
+        <div class="image-card">
+            <img src="{{ url_for('static', filename='images/' + image) }}" alt="Image">
+            <div class="card-body">
+                <a href="{{ url_for('edit_image', image_id=loop.index0) }}" class="btn-warning">Редагувати</a>
+                <form action="{{ url_for('delete_image', image_id=loop.index0) }}" method="POST">
+                    <button type="submit" class="btn-danger">Видалити</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-4">
+        <a href="{{ url_for('add_image') }}" class="btn-secondary">Додати нове зображення</a>
+    </div>
+</body>
+</html>
